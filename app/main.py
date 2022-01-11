@@ -1,8 +1,19 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+import core.mnc.index as MNC
 
 app = FastAPI()
 
+class Claim(BaseModel):
+    metaData: dict
+    diagnosisList: list
+    activityList: list
+    priorAuthorization: dict
+    observationDetails: dict
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+
+@app.post('/validateClaim')
+async def validateClaim(claimData:Claim):
+    response = await MNC.validateClaim(claimData)
+    return response
+
