@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import core.mnc.index as MNC
+import app.core.mnc.index as MNC
 
 app = FastAPI()
 
